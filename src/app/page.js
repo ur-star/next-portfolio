@@ -242,7 +242,7 @@ const Home = () => {
               </h2>
               <div className="flex justify-center space-x-6 mb-4">
                 <a
-                  href="https://www.instagram.com/the.uroy"
+                  href="https://www.instagram.com/the.utkarshroy"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
