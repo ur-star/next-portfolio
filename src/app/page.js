@@ -89,7 +89,7 @@ const Home = () => {
       {/* Navigation */}
       <nav className="p-4 md:p-6 fixed top-0 left-0 w-full z-50 bg-opacity-25 backdrop-blur-lg">
       <div className="flex justify-between items-center">
-    <div className="text-xl font-semibold text-[#F8F1E5]">
+    <div className="text-2xl font-semibold text-[#F8F1E5]">
       Welcome Here !!
     </div>
     {/* Desktop Navigation */}
