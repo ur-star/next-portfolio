@@ -55,6 +55,8 @@ const projects =[
                     drive for continuous learning and improvement, motivates me to
                     always deliver value and push the boundaries of what’s
                     possible.`
+    const name = 'Utkarsh Roy'
+    const profession = 'Software Engineer'
 
 
-  export { projects,intro};
+  export { projects,intro,name,profession};

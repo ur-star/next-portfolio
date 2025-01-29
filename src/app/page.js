@@ -8,15 +8,15 @@ import instagramImage from "./assets/instagram-image.png";
 import githubImage from "./assets/github-image.png";
 import linkedinImage from "./assets/linkedin-icon.png";
 import Typed from "typed.js";
-import {projects,intro} from "./_data.js";
+import {projects,intro,name, profession} from "./_data.js";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
+  const sectionsRef = useRef([]);
 
-  // Close the menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -31,7 +31,6 @@ const Home = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
   useEffect(() => {
-    // Initialize Typed.js when the component is mounted
     const typed = new Typed("#element", {
       strings: [
         "MERN Developer",
@@ -44,12 +43,12 @@ const Home = () => {
       fadeOut: true,
     });
 
-    // Clean up Typed.js when the component is unmounted
     return () => {
       typed.destroy();
     };
   }, []);
 
+  // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -58,6 +57,29 @@ const Home = () => {
     setActiveLink(link);
     setIsMenuOpen(false); // Close the menu when a link is clicked
   };
+
+  // Handle section visibility for dynamic nav highlighting
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.5, // Trigger when 50% of the section is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id); // Update activeLink state when section is visible
+        }
+      });
+    }, observerOptions);
+
+    // Observe each section
+    sectionsRef.current.forEach((section) => observer.observe(section));
+
+    // Cleanup observer on unmount
+    return () => {
+      sectionsRef.current.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
   return (
     <div className="bg-gradient-to-b from-[#BC3E35] to-[#8B0a10]  min-h-screen text-gray-800">
@@ -127,13 +149,14 @@ const Home = () => {
         <section
           id="home"
           className="flex flex-wrap justify-around items-center py-24 px-4 md:px-10 bg-gradient-to-r from-[#E97451] to-[#F8F1E5] min-h-screen"
+          ref={(el) => (sectionsRef.current[0] = el)}
         >
           <div className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out">
-            Hi, My name is <span className="text-[#8a75fa]">Utkarsh</span>
+            Hi, My name is <span className="text-[#8a75fa]">{name}</span>
             <div className="mt-5">
               And I am a{" "}
               <span className="font-bold text-[#8a75fa]" id="element">
-                Software Engineer
+                {profession}
               </span>
             </div>
           </div>
@@ -146,6 +169,7 @@ const Home = () => {
         <section
           id="projects"
           className="py-24 px-4 md:px-10 bg-gradient-to-r from-[#E97451] to-[#F8F1E5] min-h-screen"
+          ref={(el) => (sectionsRef.current[1] = el)}
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-[#986147]">
@@ -181,6 +205,7 @@ const Home = () => {
         <section
           id="about"
           className="py-24 px-4 md:px-10 bg-gradient-to-r from-[#E97451] to-[#F8F1E5] min-h-screen"
+          ref={(el) => (sectionsRef.current[2] = el)}
         >
           <div className="text-center mb-12 text-[#986147]">
             <h2 className="text-3xl font-bold mb-4">Who Am I?</h2>
@@ -210,6 +235,7 @@ const Home = () => {
         <section
           id="contact"
           className="py-24 px-4 md:px-10 bg-gradient-to-r from-[#986147] to-[#E97451] h-[90vh]"
+          ref={(el) => (sectionsRef.current[3] = el)}
         >
           <div className="mt-12">
             <div className="text-center mb-10">
