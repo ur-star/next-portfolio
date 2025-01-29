@@ -30,5 +30,31 @@ const projects =[
       link:'https://github.com/ur-star/SmartContract'
     }
   ]
+  const intro = `Hi, I’m Utkarsh Roy, a software engineer and full-stack
+                    developer with over 2 years of experience in building and
+                    optimizing web applications. I specialize in both front-end
+                    and back-end technologies, including JavaScript, Vue.js,
+                    React, Node.js, TypeScript, and the MERN stack. My passion for
+                    coding and problem-solving has driven me to work on a wide
+                    range of projects, delivering innovative solutions that
+                    improve user experiences, streamline processes, and create
+                    measurable impact. I’ve contributed to the development of key
+                    product features, including real-time dashboards and
+                    user-driven enhancements. I’ve also led the successful
+                    projects, which resulted in a more than 21% boost in user time
+                    spent on the app and a 25% reduction in project timelines. In
+                    addition to my work on user-centric products, I have
+                    experience developing and maintaining robust data pipelines,
+                    implementing server-side capabilities, and working with
+                    popular charting libraries for data visualization. I also
+                    possess hands-on experience with React, Node.js, and AWS,
+                    working on web application development and deployment. I’m
+                    dedicated to creating meaningful and user-centric solutions
+                    that not only meet business needs but also elevate the user
+                    experience. My strong technical foundation, combined with a
+                    drive for continuous learning and improvement, motivates me to
+                    always deliver value and push the boundaries of what’s
+                    possible.`
 
-  export default projects;
+
+  export { projects,intro};

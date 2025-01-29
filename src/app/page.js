@@ -8,7 +8,7 @@ import instagramImage from "./assets/instagram-image.png";
 import githubImage from "./assets/github-image.png";
 import linkedinImage from "./assets/linkedin-icon.png";
 import Typed from "typed.js";
-import projects from "./_data.js";
+import {projects,intro} from "./_data.js";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -88,7 +88,7 @@ const Home = () => {
           {/* Hamburger Menu Button (Visible on mobile) */}
           <button
             ref={menuButtonRef}
-            className="md:hidden text-[#FFFADA]"
+            className="md:hidden text-grey-600"
             onClick={toggleMenu}
           >
             {isMenuOpen ? "✖️" : "☰"}
@@ -191,31 +191,7 @@ const Home = () => {
               <div className="bg-[#C77440] bg-opacity-25 backdrop-blur-lg p-6 rounded-xl shadow-xl text-[#FFFADA] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out">
                 <div className="text-xl mb-3">Hello There,</div>
                 <div className="text-base text-justify">
-                  Hi, I’m Utkarsh Roy, a software engineer and full-stack
-                  developer with over 2 years of experience in building and
-                  optimizing web applications. I specialize in both front-end
-                  and back-end technologies, including JavaScript, Vue.js,
-                  React, Node.js, TypeScript, and the MERN stack. My passion for
-                  coding and problem-solving has driven me to work on a wide
-                  range of projects, delivering innovative solutions that
-                  improve user experiences, streamline processes, and create
-                  measurable impact. I’ve contributed to the development of key
-                  product features, including real-time dashboards and
-                  user-driven enhancements. I’ve also led the successful
-                  projects, which resulted in a more than 21% boost in user time
-                  spent on the app and a 25% reduction in project timelines. In
-                  addition to my work on user-centric products, I have
-                  experience developing and maintaining robust data pipelines,
-                  implementing server-side capabilities, and working with
-                  popular charting libraries for data visualization. I also
-                  possess hands-on experience with React, Node.js, and AWS,
-                  working on web application development and deployment. I’m
-                  dedicated to creating meaningful and user-centric solutions
-                  that not only meet business needs but also elevate the user
-                  experience. My strong technical foundation, combined with a
-                  drive for continuous learning and improvement, motivates me to
-                  always deliver value and push the boundaries of what’s
-                  possible.
+                  {intro}
                 </div>
               </div>
             </div>
@@ -233,7 +209,7 @@ const Home = () => {
         {/* Contact Section */}
         <section
           id="contact"
-          className="py-24 px-4 md:px-10 bg-gradient-to-r from-[#986147] to-[#E97451] min-h-screen"
+          className="py-24 px-4 md:px-10 bg-gradient-to-r from-[#986147] to-[#E97451] h-[90vh]"
         >
           <div className="mt-12">
             <div className="text-center mb-10">
