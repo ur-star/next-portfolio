@@ -1,14 +1,13 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import deveImage from "./assets/developerr.png";
 import devImage from "./assets/devImg.png";
 import instagramImage from "./assets/instagram-image.png";
 import githubImage from "./assets/github-image.png";
 import linkedinImage from "./assets/linkedin-icon.png";
 import Typed from "typed.js";
-import {projects,intro,name, profession} from "./_data.js";
+import { projects, intro, name, profession } from "./_data.js";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +29,7 @@ const Home = () => {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+
   useEffect(() => {
     const typed = new Typed("#element", {
       strings: [
@@ -48,7 +48,6 @@ const Home = () => {
     };
   }, []);
 
-  // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -56,6 +55,10 @@ const Home = () => {
   const handleLinkClick = (link) => {
     setActiveLink(link);
     setIsMenuOpen(false); // Close the menu when a link is clicked
+
+    // Find the section to scroll to
+    const section = document.getElementById(link);
+    section.scrollIntoView({ behavior: "smooth" });
   };
 
   // Handle section visibility for dynamic nav highlighting
@@ -84,39 +87,39 @@ const Home = () => {
   return (
     <div className="bg-gradient-to-b from-[#BC3E35] to-[#8B0a10]  min-h-screen text-gray-800">
       {/* Navigation */}
-      <nav className="p-6 md:p-8 fixed top-0 left-0 w-full z-50  bg-opacity-25 backdrop-blur-lg ">
-        <div className="flex justify-between items-center">
-          <div className="text-2xl font-semibold text-[#F8F1E5]">
-            Welcome Here !!
-          </div>
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-6">
-            {["home", "projects", "about", "contact"].map((item) => (
-              <li key={item} className="hover:scale-125">
-                <Link
-                  href={`#${item}`}
-                  className={`py-2 px-4 rounded-full text-md transition-all ${
-                    activeLink === item
-                      ? "bg-[#986147] text-[#F8F1E5]"
-                      : "hover:bg-[#E97451] text-[#9C7944] "
-                  }`}
-                  onClick={() => handleLinkClick(item)}
-                >
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          {/* Hamburger Menu Button (Visible on mobile) */}
+      <nav className="p-4 md:p-6 fixed top-0 left-0 w-full z-50 bg-opacity-25 backdrop-blur-lg">
+      <div className="flex justify-between items-center">
+    <div className="text-xl font-semibold text-[#F8F1E5]">
+      Welcome Here !!
+    </div>
+    {/* Desktop Navigation */}
+    <ul className="hidden md:flex space-x-4">
+      {["home", "projects", "about", "contact"].map((item) => (
+        <li key={item} className="hover:scale-110">
           <button
-            ref={menuButtonRef}
-            className="md:hidden text-grey-600"
-            onClick={toggleMenu}
+            className={`py-1 px-4 rounded-full text-sm transition-all ${
+              activeLink === item
+                ? "bg-[#986147] text-[#F8F1E5]"
+                : "hover:bg-[#E97451] text-[#9C7944]"
+            }`}
+            onClick={() => handleLinkClick(item)}
           >
-            {isMenuOpen ? "✖️" : "☰"}
+            {item.charAt(0).toUpperCase() + item.slice(1)}
           </button>
-        </div>
-      </nav>
+        </li>
+      ))}
+    </ul>
+    {/* Hamburger Menu Button (Visible on mobile) */}
+    <button
+      ref={menuButtonRef}
+      className="md:hidden text-grey-600"
+      onClick={toggleMenu}
+    >
+      {isMenuOpen ? "✖️" : "☰"}
+    </button>
+  </div>
+</nav>
+
 
       {/* Hamburger Sliding Menu */}
       <div
@@ -133,19 +136,18 @@ const Home = () => {
         </div>
         {["home", "projects", "about", "contact"].map((item) => (
           <div key={item} className="mb-4">
-            <Link
-              href={`#${item}`}
+            <button
               className="text-lg text-[#ffffe3] hover:text-[#F8F1E5]"
               onClick={() => handleLinkClick(item)}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
-            </Link>
+            </button>
           </div>
         ))}
       </div>
 
       {/* Home Section */}
-      <main className="pt-24">
+      <main className="pt-20">
         <section
           id="home"
           className="flex flex-wrap justify-around items-center py-24 px-4 md:px-10 bg-gradient-to-r from-[#E97451] to-[#F8F1E5] min-h-screen"
@@ -215,9 +217,7 @@ const Home = () => {
             <div className="w-full md:w-1/2 px-4">
               <div className="bg-[#C77440] bg-opacity-25 backdrop-blur-lg p-6 rounded-xl shadow-xl text-[#FFFADA] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out">
                 <div className="text-xl mb-3">Hello There,</div>
-                <div className="text-base text-justify">
-                  {intro}
-                </div>
+                <div className="text-base text-justify">{intro}</div>
               </div>
             </div>
             <div className="md:w-1/3 px-4 mt-8 md:mt-0">
