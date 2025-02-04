@@ -85,7 +85,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-[#BC3E35] to-[#8B0a10]  min-h-screen text-gray-800">
+    <div className="bg-gradient-to-b from-[#ed786f] to-[#8B0a10]  min-h-screen text-gray-800">
       {/* Navigation */}
       <nav className="p-4 md:p-6 fixed top-0 left-0 w-full z-50 bg-opacity-25 backdrop-blur-lg">
       <div className="flex justify-between items-center">
