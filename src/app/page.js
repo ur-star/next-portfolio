@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import deveImage from "./assets/developerr.png";
-import devImage from "./assets/devImg.png";
+import devImage from "./assets/dev-ghibly.png";
 import instagramImage from "./assets/instagram-image.png";
 import githubImage from "./assets/github-image.png";
 import linkedinImage from "./assets/linkedin-icon.png";
@@ -88,38 +88,37 @@ const Home = () => {
     <div className="bg-gradient-to-b from-[#ee9476] to-[#8B0a10]  min-h-screen text-gray-800">
       {/* Navigation */}
       <nav className="p-4 md:p-6 fixed top-0 left-0 w-full z-50 bg-opacity-25 backdrop-blur-lg">
-      <div className="flex justify-between items-center">
-    <div className="text-2xl font-semibold text-[#F8F1E5]">
-      Welcome Here !!
-    </div>
-    {/* Desktop Navigation */}
-    <ul className="hidden md:flex space-x-4">
-      {["home", "projects", "about", "contact"].map((item) => (
-        <li key={item} className="hover:scale-110">
+        <div className="flex justify-between items-center">
+          <div className="text-2xl font-semibold text-[#F8F1E5]">
+            Welcome Here !!
+          </div>
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex space-x-4">
+            {["home", "projects", "about", "contact"].map((item) => (
+              <li key={item} className="hover:scale-110">
+                <button
+                  className={`py-1 px-4 rounded-full text-sm transition-all ${
+                    activeLink === item
+                      ? "bg-[#986147] text-[#F8F1E5]"
+                      : "hover:bg-[#E97451] text-[#9C7944]"
+                  }`}
+                  onClick={() => handleLinkClick(item)}
+                >
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </button>
+              </li>
+            ))}
+          </ul>
+          {/* Hamburger Menu Button (Visible on mobile) */}
           <button
-            className={`py-1 px-4 rounded-full text-sm transition-all ${
-              activeLink === item
-                ? "bg-[#986147] text-[#F8F1E5]"
-                : "hover:bg-[#E97451] text-[#9C7944]"
-            }`}
-            onClick={() => handleLinkClick(item)}
+            ref={menuButtonRef}
+            className="md:hidden text-grey-600"
+            onClick={toggleMenu}
           >
-            {item.charAt(0).toUpperCase() + item.slice(1)}
+            {isMenuOpen ? "✖️" : "☰"}
           </button>
-        </li>
-      ))}
-    </ul>
-    {/* Hamburger Menu Button (Visible on mobile) */}
-    <button
-      ref={menuButtonRef}
-      className="md:hidden text-grey-600"
-      onClick={toggleMenu}
-    >
-      {isMenuOpen ? "✖️" : "☰"}
-    </button>
-  </div>
-</nav>
-
+        </div>
+      </nav>
 
       {/* Hamburger Sliding Menu */}
       <div
@@ -153,11 +152,11 @@ const Home = () => {
           className="flex flex-wrap justify-around items-center py-24 px-4 md:px-10 bg-gradient-to-r from-[#E97451] to-[#F8F1E5] min-h-screen"
           ref={(el) => (sectionsRef.current[0] = el)}
         >
-          <div className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out">
-            Hi, My name is <span className="text-[#8a75fa]">{name}</span>
+          <div className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transform hover:scale-125">
+            Hi, My name is <span className="text-[#5651e0]">{name}</span>
             <div className="mt-5">
               And I am a{" "}
-              <span className="font-bold text-[#8a75fa]" id="element">
+              <span className="font-bold text-orange-700" id="element">
                 {profession}
               </span>
             </div>
@@ -216,16 +215,52 @@ const Home = () => {
           <div className="flex flex-wrap items-center justify-around">
             <div className="w-full md:w-1/2 px-4">
               <div className="bg-[#C77440] bg-opacity-25 backdrop-blur-lg p-6 rounded-xl shadow-xl text-[#FFFADA] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out">
-                <div className="text-xl mb-3">Hello There,</div>
-                <div className="text-base text-justify">{intro}</div>
+                <div className="text-base text-justify">
+                  🚀 Hey there, I&apos;m <strong>Utkarsh Roy</strong> – your friendly
+                  neighborhood Full-Stack Developer & Code Crafter!
+                  <br />
+                  <br />
+                  I’m a software engineer with nearly 3 years of experience
+                  turning complex problems into elegant, scalable web solutions.
+                  I build everything from sleek UIs to powerful backend engines
+                  using technologies like{" "}
+                  <strong>React, Vue.js, Node.js, and TypeScript</strong>.
+                  Whether it’s dashboards, integrations, or entire applications,
+                  I bring ideas to life—clean, fast, and pixel-perfect.
+                  <br />
+                  <br />
+                  💻 <strong>What I Do:</strong>
+                  <br />
+                  - Frontend Sorcery: React, Vue, Next.js, Tailwind, Material
+                  UI—if it runs in the browser, I craft it.
+                  <br />
+                  - Backend Brilliance: Node.js + Express + SQL = solid, secure,
+                  and speedy apps.
+                  <br />
+                  - Cloud & DevOps: AWS, Docker, CI/CD—ready for production.
+                  <br />
+                  - Dashboards & Integrations: Real-time data, dynamic charts,
+                  and smooth workflows.
+                  <br />
+                  <br />
+                  I’m all about building things that not only meet business
+                  needs but also delight users. Whether it’s cutting project
+                  timelines by 25% or boosting user engagement by 15%, I deliver
+                  results—one line of clean, maintainable code at a time.
+                  <br />
+                  <br />
+                  Let’s build something awesome together.
+                </div>
               </div>
             </div>
+
             <div className="md:w-1/3 px-4 mt-8 md:mt-0">
               <Image
                 src={devImage}
-                alt="Utkarsh's image"
+                alt="author"
                 width={400}
                 height={400}
+                className="rounded-[15px]"
               />
             </div>
           </div>
@@ -253,7 +288,7 @@ const Home = () => {
                     alt="Instagram"
                     width={50}
                     height={50}
-                    className="hover:bg-white bg-opacity-25"
+                    className="hover:bg-white bg-opacity-25 rounded-full"
                   />
                 </a>
                 <a

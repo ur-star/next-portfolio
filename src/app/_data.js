@@ -30,11 +30,8 @@ const projects =[
       link:'https://github.com/ur-star/SmartContract'
     }
   ]
-  const intro = `Hi, I’m Utkarsh Roy, a software engineer and full-stack
-                    developer with over 2 years of experience in building and
-                    optimizing web applications. I specialize in both front-end
-                    and back-end technologies, including JavaScript, Vue.js,
-                    React, Node.js, TypeScript, and the MERN stack. My passion for
+  const intro = `I’m a software engineer with nearly 3 years of experience turning complex problems into elegant, scalable web solutions. I build everything from sleek UIs to powerful backend engines using technologies like React, Vue.js, Node.js, and TypeScript.
+   Whether it’s dashboards, integrations, or entire applications, I bring ideas to life—clean, fast, and pixel-perfect.. My passion for
                     coding and problem-solving has driven me to work on a wide
                     range of projects, delivering innovative solutions that
                     improve user experiences, streamline processes, and create
