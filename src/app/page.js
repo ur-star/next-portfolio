@@ -17,6 +17,7 @@ const Home = () => {
   const menuButtonRef = useRef(null);
   const sectionsRef = useRef([]);
   const [darkModeOn, setDarkModeOn] = useState(false);
+  const [visibleSections, setVisibleSections] = useState([]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -66,32 +67,40 @@ const Home = () => {
   // Handle section visibility for dynamic nav highlighting
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.5, // Trigger when 50% of the section is visible
+      threshold: 0.7,
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveLink(entry.target.id); // Update activeLink state when section is visible
+          setActiveLink(entry.target.id);
+          const index = sectionsRef.current.findIndex(
+            (sec) => sec === entry.target
+          );
+          if (!visibleSections.includes(index)) {
+            setVisibleSections((prev) => [...prev, index]);
+          }
         }
       });
     }, observerOptions);
 
-    // Observe each section
-    sectionsRef.current.forEach((section) => observer.observe(section));
+    sectionsRef.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
 
-    // Cleanup observer on unmount
     return () => {
-      sectionsRef.current.forEach((section) => observer.unobserve(section));
+      sectionsRef.current.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
     };
-  }, []);
+  }, [visibleSections]);
 
   return (
     <div
       className={`transition-colors duration-500 ${darkModeOn ? "dark" : ""}`}
     >
       <div
-        className={`min-h-screen text-gray-800 bg-gradient-to-b from-[#ee9476] to-[#8B0a10] dark:text-white dark:from-gray-900 dark:to-gray-700`}
+        className={`min-h-screen text-gray-800 bg-gradient-to-b from-[#ee9476] to-[#E0BFB8] dark:text-white dark:from-gray-900 dark:to-gray-700`}
       >
         {/* Navigation */}
         <nav className="p-4 md:p-6 fixed top-0 left-0 w-full z-50 bg-opacity-25 backdrop-blur-lg dark:bg-black dark:bg-opacity-25">
@@ -118,6 +127,7 @@ const Home = () => {
             </ul>
             <button
               onClick={() => {
+                setVisibleSections([]);
                 setDarkModeOn((prev) => !prev);
               }}
               className="text-2xl"
@@ -167,7 +177,13 @@ const Home = () => {
             className="flex flex-wrap justify-around items-center py-24 px-4 md:px-10 bg-gradient-to-r from-[#E97451] to-[#F8F1E5] min-h-screen dark:from-gray-900 dark:to-gray-700 transition-colors duration-500"
             ref={(el) => (sectionsRef.current[0] = el)}
           >
-            <div className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transform hover:scale-125">
+            <div
+              className={`text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transform hover:scale-125  transition-all duration-700 ${
+                visibleSections.includes(0)
+                  ? "animate-fadeInLeft"
+                  : "opacity-0 translate-x-[-50px]"
+              }`}
+            >
               Hi, My name is <span className="text-[#5651e0]">{name}</span>
               <div className="mt-5">
                 And I am a{" "}
@@ -176,7 +192,13 @@ const Home = () => {
                 </span>
               </div>
             </div>
-            <div className="mt-8 md:mt-0">
+            <div
+              className={`mt-8 md:mt-0  transition-all duration-700 ${
+                visibleSections.includes(0)
+                  ? "animate-fadeInLeft"
+                  : "opacity-0 translate-x-[-50px]"
+              }`}
+            >
               <Image
                 src={devGraphic}
                 alt="Developer"
@@ -205,7 +227,11 @@ const Home = () => {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className="p-6 bg-[#C77440] dark:bg-violet-900 dark:bg-opacity-30 bg-opacity-25 backdrop-blur-lg text-[#FFFADA] rounded-lg shadow-xl hover:bg-[#091C2C]  hover:bg-opacity-25 dark:hover:bg-opacity-10 transition-all duration-300 ease-in-out"
+                  className={`p-6 bg-[#C77440] dark:bg-violet-900 dark:bg-opacity-30 bg-opacity-25 backdrop-blur-lg text-[#FFFADA] rounded-lg shadow-xl hover:bg-[#091C2C]  hover:bg-opacity-25 dark:hover:bg-opacity-10 transition-all duration-300 ease-in-out  transition-all duration-700 ${
+                    visibleSections.includes(1)
+                      ? "animate-fadeInRight"
+                      : "opacity-0 translate-x-[50px]"
+                  }`}
                 >
                   <h3 className="text-xl font-semibold mb-4">{project.name}</h3>
                   <p className="text-sm mb-4">{project.description}</p>
@@ -238,8 +264,14 @@ const Home = () => {
             </div>
             <div className="flex flex-wrap items-center justify-around">
               <div className="w-full md:w-1/2 px-4">
-                <div className="bg-[#C77440] bg-opacity-25 dark:bg-violet-900 dark:bg-opacity-30 dark:hover:bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-xl text-[#FFFADA] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out">
-                  <div className="text-base text-justify">
+                <div
+                  className={`bg-[#C77440] bg-opacity-25 dark:bg-violet-900 dark:bg-opacity-30 dark:hover:bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-xl text-[#FFFADA] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transition-all duration-700 ${
+                    visibleSections.includes(2)
+                      ? "animate-fadeInLeft"
+                      : "opacity-0 translate-x-[-50px]"
+                  }`}
+                >
+                  <div className={`text-base text-justify`}>
                     🚀 Hey there, I&apos;m <strong>Utkarsh Roy</strong> – your
                     friendly neighborhood Full-Stack Developer & Code Crafter!
                     <br />
@@ -286,7 +318,11 @@ const Home = () => {
                   alt="author"
                   width={400}
                   height={400}
-                  className="rounded-[15px] transition-opacity duration-500"
+                  className={`rounded-[15px] transition-all duration-700 ${
+                    visibleSections.includes(2)
+                      ? "animate-fadeInRight"
+                      : "opacity-0 translate-x-[-50px]"
+                  }`}
                 />
               </div>
             </div>
@@ -295,7 +331,11 @@ const Home = () => {
           {/* Contact Section */}
           <section
             id="contact"
-            className="transition-bg duration-500 py-24 px-4 md:px-10 bg-gradient-to-r from-[#986147] to-[#E97451] h-[90vh]  dark:from-gray-900 dark:to-gray-700"
+            className={`transition-bg duration-500 py-24 px-4 md:px-10 bg-gradient-to-r from-[#BF7D6E] to-[#E97451] h-[90vh]  dark:from-gray-900 dark:to-gray-700  transition-all duration-700 ${
+              visibleSections.includes(3)
+                ? "animate-fadeInBottom"
+                : "opacity-0 translate-y-[100px]"
+            }`}
             ref={(el) => (sectionsRef.current[3] = el)}
           >
             <div className="mt-12">

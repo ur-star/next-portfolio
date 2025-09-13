@@ -28,7 +28,7 @@ const projects =[
       name: 'Crowd contract',
       description: 'A smart contract written in solidity for crowdfunding. user can accept crypto in their wallet and fund will be auto returned to the contributers, If contract is not completed',
       link:'https://github.com/ur-star/SmartContract'
-    }
+    },
   ]
   const intro = `I’m a software engineer with nearly 3 years of experience turning complex problems into elegant, scalable web solutions. I build everything from sleek UIs to powerful backend engines using technologies like React, Vue.js, Node.js, and TypeScript.
    Whether it’s dashboards, integrations, or entire applications, I bring ideas to life—clean, fast, and pixel-perfect.. My passion for
