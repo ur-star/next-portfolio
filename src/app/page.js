@@ -18,6 +18,14 @@ const Home = () => {
   const sectionsRef = useRef([]);
   const [darkModeOn, setDarkModeOn] = useState(false);
   const [visibleSections, setVisibleSections] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth < 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -178,10 +186,12 @@ const Home = () => {
             ref={(el) => (sectionsRef.current[0] = el)}
           >
             <div
-              className={`text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transform hover:scale-125  transition-all duration-700 ${
-                visibleSections.includes(0)
+              className={`text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transform hover:scale-125 transition-all duration-700 ${
+                !isMobile && visibleSections.includes(0)
                   ? "animate-fadeInLeft"
-                  : "opacity-0 translate-x-[-50px]"
+                  : !isMobile
+                  ? "opacity-0 translate-x-[-50px]"
+                  : ""
               }`}
             >
               Hi, My name is <span className="text-[#5651e0]">{name}</span>
@@ -193,10 +203,12 @@ const Home = () => {
               </div>
             </div>
             <div
-              className={`mt-8 md:mt-0  transition-all duration-700 ${
-                visibleSections.includes(0)
+              className={`text-3xl md:text-4xl lg:text-5xl font-semibold text-center md:text-left max-w-lg bg-white bg-opacity-25 backdrop-blur-lg p-6 rounded-xl h-[260px] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transform hover:scale-125 transition-all duration-700 ${
+                !isMobile && visibleSections.includes(0)
                   ? "animate-fadeInLeft"
-                  : "opacity-0 translate-x-[-50px]"
+                  : !isMobile
+                  ? "opacity-0 translate-x-[-50px]"
+                  : ""
               }`}
             >
               <Image
@@ -227,10 +239,12 @@ const Home = () => {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className={`p-6 bg-[#C77440] dark:bg-violet-900 dark:bg-opacity-30 bg-opacity-25 backdrop-blur-lg text-[#FFFADA] rounded-lg shadow-xl hover:bg-[#091C2C]  hover:bg-opacity-25 dark:hover:bg-opacity-10 transition-all duration-300 ease-in-out  transition-all duration-700 ${
-                    visibleSections.includes(1)
+                  className={`p-6 bg-[#C77440] dark:bg-violet-900 dark:bg-opacity-30 bg-opacity-25 backdrop-blur-lg text-[#FFFADA] rounded-lg shadow-xl hover:bg-[#091C2C] hover:bg-opacity-25 dark:hover:bg-opacity-10 transition-all duration-300 ease-in-out transition-all duration-700 ${
+                    !isMobile && visibleSections.includes(1)
                       ? "animate-fadeInRight"
-                      : "opacity-0 translate-x-[50px]"
+                      : !isMobile
+                      ? "opacity-0 translate-x-[50px]"
+                      : ""
                   }`}
                 >
                   <h3 className="text-xl font-semibold mb-4">{project.name}</h3>
@@ -266,9 +280,11 @@ const Home = () => {
               <div className="w-full md:w-1/2 px-4">
                 <div
                   className={`bg-[#C77440] bg-opacity-25 dark:bg-violet-900 dark:bg-opacity-30 dark:hover:bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-xl text-[#FFFADA] hover:bg-[#091C2C] hover:bg-opacity-25 transition-all duration-300 ease-in-out transition-all duration-700 ${
-                    visibleSections.includes(2)
+                    !isMobile && visibleSections.includes(2)
                       ? "animate-fadeInLeft"
-                      : "opacity-0 translate-x-[-50px]"
+                      : !isMobile
+                      ? "opacity-0 translate-x-[-50px]"
+                      : ""
                   }`}
                 >
                   <div className={`text-base text-justify`}>
@@ -319,9 +335,11 @@ const Home = () => {
                   width={400}
                   height={400}
                   className={`rounded-[15px] transition-all duration-700 ${
-                    visibleSections.includes(2)
+                    !isMobile && visibleSections.includes(2)
                       ? "animate-fadeInRight"
-                      : "opacity-0 translate-x-[-50px]"
+                      : !isMobile
+                      ? "opacity-0 translate-x-[-50px]"
+                      : ""
                   }`}
                 />
               </div>
@@ -331,10 +349,12 @@ const Home = () => {
           {/* Contact Section */}
           <section
             id="contact"
-            className={`transition-bg duration-500 py-24 px-4 md:px-10 bg-gradient-to-r from-[#BF7D6E] to-[#E97451] h-[90vh]  dark:from-gray-900 dark:to-gray-700  transition-all duration-700 ${
-              visibleSections.includes(3)
+            className={`transition-bg duration-500 py-24 px-4 md:px-10 bg-gradient-to-r from-[#BF7D6E] to-[#E97451] h-[90vh] dark:from-gray-900 dark:to-gray-700 transition-all duration-700 ${
+              !isMobile && visibleSections.includes(3)
                 ? "animate-fadeInBottom"
-                : "opacity-0 translate-y-[100px]"
+                : !isMobile
+                ? "opacity-0 translate-y-[100px]"
+                : ""
             }`}
             ref={(el) => (sectionsRef.current[3] = el)}
           >
